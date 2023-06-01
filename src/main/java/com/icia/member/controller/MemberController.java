@@ -65,6 +65,12 @@ public class MemberController {
         return new ResponseEntity<>(memberDTO, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Long id) {
+        memberService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
 
 

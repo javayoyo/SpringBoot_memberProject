@@ -71,6 +71,20 @@
             alert("해당 회원이 없습니다!");
         });
     }
+
+    const member_delete = (id) => {
+        // location.href = "/member/delete/" + id;
+        axios({
+            method: "delete",
+            url: "/member/" + id
+        }).then(res => {
+            alert("삭제완료! 확인을 클릭하면 목록으로 고고");
+            location.href = "/member/";
+        }).catch(err => {
+            alert("삭제실패");
+        });
+    }
+
 </script>
 
 </html>
