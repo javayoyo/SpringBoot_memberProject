@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
+
 @SpringBootTest
 public class MemberTest {
 
@@ -59,6 +61,32 @@ public class MemberTest {
 
 
     }
+
+    @Test
+    @Transactional
+    @Rollback
+    @DisplayName("로그인 테스트")
+    public void loginTest() {
+        MemberDTO memberDTO = newMember(999);
+        MemberDTO loginDTO = new MemberDTO();
+        loginDTO.setMemberEmail("wrong email");
+        loginDTO.setMemberPassword("1234");
+        assertThatThrownBy(() -> memberService.loginAxios(loginDTO))
+                .isInstanceOf(NoSuchElementException.class);
+    }
+
+    @Test
+    @DisplayName("회원 삭제 테스트")
+    public void deleteTest() {
+        MemberDTO memberDTO = newMember(999);
+        Long savedId = memberService.save(memberDTO);
+        memberService.delete(savedId);
+        assertThatThrownBy(() -> memberService.findById(savedId))
+                .isInstanceOf(NoSuchElementException.class);
+    }
+
+
+
 
 
 }

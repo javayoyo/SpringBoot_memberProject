@@ -54,6 +54,7 @@ public class MemberController {
 
     @PostMapping("/login/axios")
     public ResponseEntity memberLoginAxios(@RequestBody MemberDTO memberDTO, HttpSession session) throws Exception {
+        //        예외가 생기면 axios 로 넘긴다(이메일,비밀번호틀리면 login.html > catch > err 호출)
         memberService.loginAxios(memberDTO);
         session.setAttribute("loginEmail", memberDTO.getMemberEmail());
         return new ResponseEntity<>(HttpStatus.OK);
