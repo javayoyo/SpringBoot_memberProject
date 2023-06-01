@@ -40,10 +40,12 @@ public class MemberService {
         }
     }
 
+    //    익명 함수 : 자바스크립트 해당 실행문구에 대해 => // 자바 -> (화살표 사용)
     public void loginAxios(MemberDTO memberDTO) {
-        // chaining method (체이닝 메서드)
+        // chaining method (체이닝 메서드) > 꼬리에 계속 연결되어 있는 메서드
         memberRepository.findByMemberEmailAndMemberPassword(memberDTO.getMemberEmail(), memberDTO.getMemberPassword())
                 .orElseThrow(() -> new NoSuchElementException("이메일 또는 비밀번호가 틀립니다"));
+        //  ㄴ .orElseThrow() > optional 객체가 없는 경우 예외를 준다
     }
 
     public MemberDTO findById(Long id) {

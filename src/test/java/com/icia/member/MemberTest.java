@@ -15,19 +15,18 @@ import java.util.NoSuchElementException;
 
 @SpringBootTest
 public class MemberTest {
+    @Autowired
+    MemberRepository memberRepository;
 
     @Autowired
     MemberService memberService;
-    @Autowired
-    MemberRepository memberRepository;
 
     @Test
     @DisplayName("repository method 테스트")
     public void repositoryTest() {
         memberRepository.findByMemberEmail("aaa");
-        memberRepository.findByMemberEmailAndMemberPassword("aaa","1234");
+        memberRepository.findByMemberEmailAndMemberPassword("aaa", "1234");
     }
-
 
     private MemberDTO newMember(int i) {
         MemberDTO memberDTO = new MemberDTO();
@@ -41,26 +40,24 @@ public class MemberTest {
 
     @Test
     public void testData() {
-        for (int i=1 ;i<=20; i++) {
+        for (int i=1; i<=20; i++) {
             memberService.save(newMember(i));
-
         }
     }
 
-    // 회원가입 테스트
+    // 회원가입테스트
     @Test
     @Transactional
     @Rollback
-    @DisplayName("회원가입테스트")
-//    ㄴ   import static org.assertj.core.api.Assertions.*; /해당 import 입력 필요
+    @DisplayName("회원가입 테스트")
     public void memberSaveTest() {
         MemberDTO memberDTO = newMember(999);
         Long savedId = memberService.save(memberDTO);
         MemberDTO dto = memberService.findById(savedId);
         assertThat(memberDTO.getMemberEmail()).isEqualTo(dto.getMemberEmail());
-
-
+        //    ㄴ   import static org.assertj.core.api.Assertions.*; /해당 import 입력 필요
     }
+
 
     @Test
     @Transactional
@@ -84,9 +81,5 @@ public class MemberTest {
         assertThatThrownBy(() -> memberService.findById(savedId))
                 .isInstanceOf(NoSuchElementException.class);
     }
-
-
-
-
 
 }

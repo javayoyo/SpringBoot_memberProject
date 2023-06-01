@@ -1,8 +1,8 @@
-# server port ?? ??
+# server port 번호 설정
 server:
   port: 8082
 
-# data base ?? ??
+# data base 연동 설정
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -10,18 +10,18 @@ spring:
     username: user_springboot
     password: 1234
 
-  # thymeleaf ?? ??
+  # thymeleaf 캐시 설정
   thymeleaf:
     cache: false
 
-  # spring data jpa ??
+  # spring data jpa 설정
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: false
     hibernate:
       ddl-auto: update
 
-# db query log ?? ??
+# db query log 관련 설정
 logging:
   level:
     org:
