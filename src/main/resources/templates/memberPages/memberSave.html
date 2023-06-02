@@ -8,7 +8,7 @@
 <div th:replace="component/header :: header"></div>
 <div th:replace="component/nav :: nav"></div>
 <form action="/member/save" method="post">
-    <input type="text" name="memberEmail" placeholder="이메일" id="member-email" onblur="email_check()"> <br>
+    <input type="text" name="memberEmail" placeholder="이메일" id="member-email",onclick="email_check()"> <br>
     <p id="check-result"></p>
     <input type="text" name="memberPassword" placeholder="비밀번호"> <br>
     <input type="text" name="memberName" placeholder="이름"> <br>

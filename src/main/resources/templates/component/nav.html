@@ -30,10 +30,10 @@
         console.log(loginEmail.length);
 
         if (loginEmail.length != 0) {
-            loginArea.innerHTML = "<a href='/mypage' style='color: black;'>" + loginEmail + "님 환영해요!</a>" +
+            loginArea.innerHTML = "<a href='/member/mypage' style='color: black;'>" + loginEmail + "님 환영해요!</a>" +
                 "<a href='/logout'>logout</a>";
         } else {
-            loginArea.innerHTML = "<a href='/login'>login</a>";
+            loginArea.innerHTML = "<a href='/member/login'>login</a>";
         }
     </script>
 </div>

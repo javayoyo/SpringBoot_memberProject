@@ -54,10 +54,14 @@ public class MemberController {
 
     @PostMapping("/login/axios")
     public ResponseEntity memberLoginAxios(@RequestBody MemberDTO memberDTO, HttpSession session) throws Exception {
-        //        예외가 생기면 axios 로 넘긴다(이메일,비밀번호틀리면 login.html > catch > err 호출)
         memberService.loginAxios(memberDTO);
         session.setAttribute("loginEmail", memberDTO.getMemberEmail());
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/mypage")
+    public String myPage() {
+        return "memberPages/memberMain";
     }
 
     @GetMapping("/axios/{id}")
@@ -70,6 +74,28 @@ public class MemberController {
     public ResponseEntity delete(@PathVariable Long id) {
         memberService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/update")
+    public String updateForm(HttpSession session, Model model) {
+        String loginEmail = (String) session.getAttribute("loginEmail");
+        MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        model.addAttribute("member", memberDTO);
+//        model.addAttribute("member", memberService.findByMemberEmail(loginEmail));
+        return "memberPages/memberUpdate";
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity update(@RequestBody MemberDTO memberDTO) {
+        memberService.update(memberDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public String detail(@PathVariable Long id, Model model) {
+        MemberDTO memberDTO = memberService.findById(id);
+        model.addAttribute("member", memberDTO);
+        return "memberPages/memberDetail";
     }
 
 }
