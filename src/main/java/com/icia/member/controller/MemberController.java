@@ -37,14 +37,19 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String loginForm(@RequestParam(value = "redirectURI", defaultValue = "/member/mypage") String redirectURI, Model model) {
+    public String loginForm(@RequestParam(value = "redirectURI", defaultValue = "/member/mypage") String redirectURI,
+                            Model model) {
+        System.out.println("MemberController.loginForm");
+        System.out.println("redirectURI = " + redirectURI);
         model.addAttribute("redirectURI", redirectURI);
         return "memberPages/memberLogin";
     }
 
     @PostMapping("/login")
     public String memberLogin(@ModelAttribute MemberDTO memberDTO, HttpSession session,
-                              @RequestParam("redirectURI")String redirectURI ) {
+                              @RequestParam("redirectURI") String redirectURI) {
+        System.out.println("MemberController.memberLogin");
+        System.out.println("URI" + redirectURI);
         boolean loginResult = memberService.login(memberDTO);
         if (loginResult) {
             session.setAttribute("loginEmail", memberDTO.getMemberEmail());

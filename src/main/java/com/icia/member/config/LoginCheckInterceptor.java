@@ -17,7 +17,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 
     // 사용자가 요청한 주소 확인
         String requestURI = request.getRequestURI();
-        System.out.println("requestURI = " + requestURI);
+        System.out.println("requestURL = " + requestURI);
         // 세션 객체 생성
         HttpSession session = request.getSession();
         // 세션에 저장된 로그인 정보 확인
