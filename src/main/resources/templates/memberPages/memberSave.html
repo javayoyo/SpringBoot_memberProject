@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="component/config :: config"></th:block>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 </head>
 <body>
 <div th:replace="component/header :: header"></div>
@@ -24,32 +23,27 @@
     <input type="submit" value="회원가입">
 </form>
 <div th:replace="component/footer :: footer"></div>
-
 </body>
-
 <script>
     const email_check = () => {
-
         document.querySelector("#good").style.display = "none";
         document.querySelector("#no").style.display = "none";
         const email = document.querySelector("#member-email").value;
-      axios({
-          method: "post",
-          url: "/member/dup-check",
-          data: {
-              memberEmail: email
-          }
-      }).then(res => {
-          //  중복되지 않은 경우
-          console.log("then");
-          document.querySelector("#good").style.display = "block";
-      }).catch(err => {
-          // 중복된 경우
-          console.log("catch");
-          document.querySelector("#no").style.display = "block";
-
-      });
-
+        axios({
+            method: "post",
+            url: "/member/dup-check",
+            data: {
+                memberEmail: email
+            }
+        }).then(res => {
+            // 중복되지 않은 경우
+            console.log("then");
+            document.querySelector("#good").style.display = "block";
+        }).catch(err => {
+            // 중복된 경우
+            console.log("catch");
+            document.querySelector("#no").style.display = "block";
+        });
     }
 </script>
 </html>

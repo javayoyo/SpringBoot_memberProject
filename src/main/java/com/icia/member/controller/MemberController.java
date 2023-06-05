@@ -113,12 +113,10 @@ public class MemberController {
     public ResponseEntity emailCheck(@RequestBody MemberDTO memberDTO) {
 //        memberService.findByMemberEmail(memberDTO.getMemberEmail());
 //        return new ResponseEntity<>(HttpStatus.OK);
-
         boolean result = memberService.emailCheck(memberDTO.getMemberEmail());
         if (result) {
             return new ResponseEntity<>(HttpStatus.OK);
-
-        }else {
+        } else {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
@@ -126,7 +124,7 @@ public class MemberController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/";
+        return "index";
     }
 }
 
